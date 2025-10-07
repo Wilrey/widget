@@ -6,7 +6,7 @@ window.Framework = {
         clientIds: {
             'mypurecloud.de': 'ee4696b8-16c4-40ce-87ae-7322597880ac'
         },
-        customInteractionAttributes: ['PT_URLPop', 'PT_SearchValue', 'PT_TransferContext'],
+        customInteractionAttributes: ['ID_Callback'],
         settings: {
             embedWebRTCByDefault: true,
             hideWebRTCPopUpOption: false,
