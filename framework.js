@@ -18,8 +18,8 @@ window.Framework = {
             callControls: ['pickup', 'mute', 'disconnect'],
             searchTargets: ['frameworkcontacts'],
             theme: {
-                primary: '#d4cebd',
-                text: '#123'
+                primary: '#6264A7',
+                text: '#FFFFFF'
             }
         }
     },
