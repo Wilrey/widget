@@ -161,6 +161,16 @@
                 <textarea id="notificationSubscriptionPayload" rows="5"></textarea>        
             </div>
         </div>
-
     </div>
+    <script>
+  // Escucha los mensajes que envía el embeddable
+  window.addEventListener("message", function(event) {
+    try {
+      const data = JSON.parse(event.data);
+      console.log("📨 Mensaje recibido del embeddable:", data);
+    } catch {
+      console.log("Mensaje no parseable:", event.data);
+    }
+  });
+</script>
 </body>
