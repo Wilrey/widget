@@ -55,6 +55,7 @@ window.Framework = {
                     } else if(message.type == "addAssociation"){
                         window.PureCloud.addAssociation(message.data);
                     }else if(message.type == "addAttribute"){
+                        console.log(message.data);
                         window.PureCloud.addCustomAttributes(message.data);
                     }else if(message.type == "addTransferContext"){
                         window.PureCloud.addTransferContext(message.data);
