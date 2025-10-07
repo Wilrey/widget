@@ -17,7 +17,7 @@
     </div>
 
     <div class='content'>
-        <h1>Widget de Prueba WF</h1>
+        <h1>Widget de Prueba WF.</h1>
 
         <div class="actions">
             <h3>Actions</h3>
@@ -173,13 +173,34 @@
     </div>
     <script>
         // Escucha los eventos que el embeddable envía a tu página
-        window.addEventListener("message", function(event) {
-          try {
-            const data = JSON.parse(event.data);
-            console.log("📨 Mensaje recibido del embeddable:", data);
-          } catch {
-            console.log("Mensaje no parseable:", event.data);
+    window.addEventListener("message", function(event) {
+        try {
+          const data = JSON.parse(event.data);
+          console.log("📨 Mensaje recibido del embeddable:", data);
+    
+          // 👇 INTENTA MOSTRAR LOS ATRIBUTOS (participant/custom attributes)
+          const ix =
+            data?.data?.interaction ||
+            data?.interaction ||
+            data?.data?.conversation ||
+            data?.conversation;
+    
+          if (ix) {
+            const attrs =
+              ix.participantData ||
+              ix.attributes ||
+              ix.customAttributes ||
+              (ix.context && ix.context.attributes);
+    
+            if (attrs) {
+              console.log("🧩 Atributos de la conversación:", JSON.stringify(attrs, null, 2));
+              // (opcional) ver uno concreto, p.ej. ID_Callback:
+              if (attrs.ID_Callback) console.log("➡️ ID_Callback:", attrs.ID_Callback);
+            }
           }
-        });
+        } catch {
+          console.log("Mensaje no parseable:", event.data);
+        }
+      });
     </script>
 </body>
