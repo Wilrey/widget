@@ -36,7 +36,7 @@
             <div class="action">
                 <h4 class="actionName">Add Custom Attributes</h4>
                 <p>Interaction.addCustomAttributes allows you to add additional information to interactions and sync these attributes to call logs associated with these interactions. An example use case is to save the current state of an agent's workspace and transfer the workspace to a new agent.</p>
-                <textarea id="attributePayload" rows="4">{"interactionId":"1234-1234-1234-1234","attributes": {"ID_Callback": "hola"}}</textarea>
+                <textarea id="attributePayload" rows="4">{"interactionId":"1234-1234-1234-1234","attributes": {"ID_Callback": "https://exampleworkspaceurl.com"}}</textarea>
                 <button id="addAttribute">Send Data</button>
             </div>
 
@@ -50,7 +50,7 @@
             <div class="action">
                 <h4 class="actionName">Contact Search Options <span id="searchText"></span></h4>
                 <p>contactSearch allows you to define which contacts the integration returns from an external CRM when agents search for names or phone numbers before making calls or transferring interactions.</p>
-                <textarea id="contactSearchPayload">[{"type": "external", "name": "Wilfredo", "phone":[{ "number":"604804440", "label":"Cell"}]}]</textarea>
+                <textarea id="contactSearchPayload" rows="4">[{"type": "external", "name": "Weather Line", "phone":[{ "number":"(317) 222-2222", "label":"Cell"}]}]</textarea>
             </div>
             
             <div class="action">
