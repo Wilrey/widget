@@ -180,6 +180,19 @@
           try {
             const data = JSON.parse(event.data);
             console.log("📨 Mensaje recibido del embeddable:", data);
+              
+              // 👇 Extrae e imprime los atributos si existen en el evento
+              const i = data?.data?.interaction || data?.interaction;
+              const attrs =
+                i?.participantData ||
+                i?.attributes ||
+                i?.customAttributes ||
+                (i?.context && i.context.attributes);
+        
+              if (attrs && Object.keys(attrs).length) {
+                console.log("📋 Atributos de la conversación:");
+                console.log(JSON.stringify(attrs, null, 2)); // formateado legible
+              }
           } catch {
             console.log("Mensaje no parseable:", event.data);
           }
