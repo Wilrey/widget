@@ -51,23 +51,9 @@
                 <h4 class="actionName">Contact Search Options <span id="searchText"></span></h4>
                 <p>contactSearch allows you to define which contacts the integration returns from an external CRM when agents search for names or phone numbers before making calls or transferring interactions.</p>
                 <textarea id="contactSearchPayload" rows="3">
-                    [
-                        {
-                          type: "external",
-                          name: "Wilfredo",
-                          phone: [{ number: "+34678678678", label: "Móvil" }]
-                        },
-                        {
-                          type: "external",
-                          name: "Adrian",
-                          phone: [{ number: "+34657657657", label: "Oficina" }]
-                        },
-                        {
-                          type: "external",
-                          name: "Manero",
-                          phone: [{ number: "+34675675675", label: "Central" }]
-                        }
-                    ]
+                    [{type: "external",name: "Wilfredo", phone: [{number: "+34678678678", label: "Móvil"}]},
+                    {type: "external",name: "Adrian", phone: [{number: "+34657657657", label: "Oficina"}]},
+                    {type: "external",name: "Manero", phone: [{number: "+34675675675", label: "Central"}]}]
                 </textarea>
             </div>
             
@@ -189,22 +175,14 @@
         </div>
     </div>
     <script>
-      window.addEventListener("message", function(event) {
-        try {
-          const parsed = JSON.parse(event.data);
-    
-          console.groupCollapsed(
-            `📨 Evento: ${parsed.type || "sin tipo"}`
-          );
-          console.log("🔹 Detalle completo:", parsed);
-          if (parsed.data) {
-            console.log("📦 Contenido legible:");
-            console.log(JSON.stringify(parsed.data, null, 2)); // ← formatea con sangrías
+        // Escucha los eventos que el embeddable envía a tu página
+        window.addEventListener("message", function(event) {
+          try {
+            const data = JSON.parse(event.data);
+            console.log("📨 Mensaje recibido del embeddable:", data);
+          } catch {
+            console.log("Mensaje no parseable:", event.data);
           }
-          console.groupEnd();
-        } catch (err) {
-          console.warn("Mensaje no JSON:", event.data);
-        }
-      });
+        });
     </script>
 </body>
