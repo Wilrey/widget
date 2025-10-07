@@ -1,6 +1,17 @@
 <head>
     <script src="./framework.js"></script>
     <link type="text/css" rel="stylesheet" href="/css/example.css">
+    <style>
+      /* Hace que todas las textarea ocupen el ancho total */
+      textarea {
+        width: 100%;
+        height: 90vh;      /* casi toda la altura de la ventana */
+        box-sizing: border-box;
+        resize: vertical;  /* permite cambiar tamaño manualmente si quieres */
+        font-family: monospace;
+        font-size: 14px;
+      }
+    </style>
 </head>
 <body>
     <div class="softphone" style="height:50vh; width:25vh; margin:0; padding:0;">
@@ -28,7 +39,7 @@
             <div class="action">
                 <h4 class="actionName">Add Custom Attributes</h4>
                 <p>Interaction.addCustomAttributes allows you to add additional information to interactions and sync these attributes to call logs associated with these interactions. An example use case is to save the current state of an agent's workspace and transfer the workspace to a new agent.</p>
-                <textarea id="attributePayload" rows="4">{"interactionId":"1234-1234-1234-1234","attributes": {"exampleWorkspaceKey": "https://exampleworkspaceurl.com"}}</textarea>
+                <textarea id="attributePayload" rows="4">{"interactionId":"1234-1234-1234-1234","attributes": {"ID_Callback": "1234"}}</textarea>
                 <button id="addAttribute">Send Data</button>
             </div>
 
