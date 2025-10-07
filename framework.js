@@ -15,6 +15,7 @@ window.Framework = {
             hideCallLogSubject: true,
             hideCallLogContact: false,
             hideCallLogRelation: false,
+            callControls: ["pickup", "transfer", "mute", "disconnect"],
             searchTargets: ['people', 'queues', 'frameworkcontacts'],
             theme: {
                 primary: '#d4cebd',
