@@ -163,14 +163,22 @@
         </div>
     </div>
     <script>
-  // Escucha los mensajes que envía el embeddable
-  window.addEventListener("message", function(event) {
-    try {
-      const data = JSON.parse(event.data);
-      console.log("📨 Mensaje recibido del embeddable:", data);
-    } catch {
-      console.log("Mensaje no parseable:", event.data);
-    }
-  });
-</script>
+      window.addEventListener("message", function(event) {
+        try {
+          const parsed = JSON.parse(event.data);
+    
+          console.groupCollapsed(
+            `📨 Evento: ${parsed.type || "sin tipo"}`
+          );
+          console.log("🔹 Detalle completo:", parsed);
+          if (parsed.data) {
+            console.log("📦 Contenido legible:");
+            console.log(JSON.stringify(parsed.data, null, 2)); // ← formatea con sangrías
+          }
+          console.groupEnd();
+        } catch (err) {
+          console.warn("Mensaje no JSON:", event.data);
+        }
+      });
+    </script>
 </body>
