@@ -16,13 +16,31 @@ window.Framework = {
             hideCallLogContact: false,
             hideCallLogRelation: false,
             callControls: ['pickup', 'mute', 'disconnect'],
-            searchTargets: ['people', 'queues', 'frameworkcontacts'],
+            searchTargets: ['frameworkcontacts'],
             theme: {
                 primary: '#d4cebd',
                 text: '#123'
             }
         }
     },
+    
+    frameworkContacts: [
+    {
+      type: "external",
+      name: "Wilfredo",
+      phone: [{ number: "+34678678678", label: "Móvil" }]
+    },
+    {
+      type: "external",
+      name: "Adrian",
+      phone: [{ number: "+34657657657", label: "Oficina" }]
+    },
+    {
+      type: "external",
+      name: "Manero",
+      phone: [{ number: "+34675675675", label: "Central" }]
+    }
+  ],
 
     initialSetup: function () {
         window.PureCloud.subscribe([
