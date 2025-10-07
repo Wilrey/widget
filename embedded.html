@@ -17,7 +17,7 @@
     </div>
 
     <div class='content'>
-        <h1>Widget de Prueba WF</h1>
+        <h1>Widget de Prueba W.F.</h1>
 
         <div class="actions">
             <h3>Actions</h3>
@@ -176,9 +176,7 @@
         window.addEventListener("message", function(event) {
           try {
             const data = JSON.parse(event.data);
-            console.group("📨 Mensaje recibido del embeddable");
-            console.dir(data); // 👈 muestra el objeto expandible y legible
-            console.groupEnd();
+            console.log("📨 Mensaje recibido del embeddable:", data);
           } catch {
             console.log("Mensaje no parseable:", event.data);
           }
