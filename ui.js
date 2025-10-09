@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded',function(){
         console.log('process click to dial');
         document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
             type: 'clickToDial',
-            data: { number: '3172222222', autoPlace: true }
+            data: { number: '633854303', autoPlace: true }
         }), "*");
     }
 
