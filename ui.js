@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded',function(){
             action: event.target.outerText,
             id: interactionId
         };
+        console.log(JSON.stringify({type: 'updateInteractionState',data: payload}));
         document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
             type: 'updateInteractionState',
             data: payload
