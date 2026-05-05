@@ -327,12 +327,13 @@
     console.log('[PARENT] softphone iframe loaded');
   });
 
-  clickToDialLink.addEventListener('click', function (e) {
+clickToDialLink.addEventListener('click', function (e) {
     e.preventDefault();
 
     const payload = {
       type: 'clickToDial',
       data: {
+        type: 'call',
         number: '+34604804440'
       }
     };
