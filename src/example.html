@@ -11,7 +11,6 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Left button */
         #toggleControls {
             position: fixed;
             top: 16px;
@@ -25,7 +24,6 @@
             cursor: pointer;
         }
 
-        /* Right button */
         #toggleContent {
             position: fixed;
             top: 16px;
@@ -39,12 +37,11 @@
             cursor: pointer;
         }
 
-        /* Left drawer */
         .drawer-left {
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 20vW;
+            width: 20vw;
             height: 50vh;
             background: #fff;
             box-shadow: 2px 0 12px rgba(0,0,0,0.2);
@@ -57,7 +54,6 @@
             transform: translateX(0);
         }
 
-        /* Right drawer */
         .drawer-right {
             position: fixed;
             bottom: 0;
@@ -99,16 +95,20 @@
         textarea, input, select, button {
             margin-top: 8px;
         }
+
+        .phone-link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- Buttons -->
     <button id="toggleControls">Open / Close Controls</button>
     <button id="toggleContent">Open / Close Content</button>
 
-    <!-- Left drawer (softphone) -->
     <div class="drawer-left" id="controlsDrawer">
         <iframe 
             id="softphone"
@@ -117,7 +117,6 @@
         </iframe>
     </div>
 
-    <!-- Right drawer (interaction content) -->
     <div class="drawer-right" id="contentDrawer">
         <iframe 
             id="interactionFrame"
@@ -133,114 +132,12 @@
 
             <div class="action">
                 <h4 class="actionName">Click-to-Dial</h4>
-                <p>You can raise events from the main application to automatically place a call using the embedded client. <a href="#" id='clickToDial'>(+34) 604-804-440</a></p>
-            </div>
-
-            <div class="action">
-                <h4 class="actionName">Add Associations</h4>
-                <p>addAssociation allows you to update options for Name or Related To fields in the Interaction Log view. The selected option is sent to the embeddable framework when processCallLog is raised.</p>
-                <textarea id="associationPayload" rows="4">{"type":"contact", "id":"1234", "text":"Weather Line", "select": true}</textarea>
-                <button id="addAssociation" type="button">Send Data</button>
-            </div>
-
-            <div class="action">
-                <h4 class="actionName">Add Custom Attributes</h4>
-                <p>Interaction.addCustomAttributes allows you to add additional information to interactions and sync these attributes to call logs associated with these interactions.</p>
-                <textarea id="attributePayload" rows="4">{"interactionId":"1234-1234-1234-1234","attributes": {"exampleWorkspaceKey": "https://exampleworkspaceurl.com"}}</textarea>
-                <button id="addAttribute" type="button">Send Data</button>
-            </div>
-
-            <div class="action">
-                <h4 class="actionName">Add Transfer Context</h4>
-                <p>addTransferContext allows agents to provide additional information when transferring interactions.</p>
-                <textarea id="transferContextPayload" rows="4">{"name": "Case: 1234 - Broken Phone","attributes": {"PT_TransferContext": "1234"}}</textarea>
-                <button id="addTransferContext" type="button">Send Data</button>
-            </div>
-
-            <div class="action">
-                <h4 class="actionName">Contact Search Options</h4>
-                <textarea id="contactSearchPayload" rows="4">[{"type": "external", "name": "Weather Line", "phone":[{ "number":"(317) 222-2222", "label":"Cell"}]}]</textarea>
-            </div>
-
-            <div class="action">
-                <h4 class="actionName">Update User Status</h4>
-                <select id='statusDropDown'>
-                    <option value="AVAILABLE">Available</option>
-                    <option value="AWAY">Away</option>
-                    <option value="ON_QUEUE">On Queue</option>
-                </select>
-                <button id="updateUserStatus" type="button">Send Data</button>
-            </div>
-
-            <div class="action">
-                <h4 class="actionName">Set User View</h4>
-                <button class='views' id="view-interactionList">interactionList</button>
-                <button class='views' id="view-calllog">callLog</button>
-                <button class='views' id="view-newInteraction">newInteraction</button>
-                <button class='views' id="view-callback">callback</button>
-                <button class='views' id="view-settings">settings</button>
-            </div>
-
-            <div class="action">
-                <h4 class="actionName">Update Interaction States</h4>
-                <button class='callControl' id="pickupInteraction">pickup</button>
-                <button class='callControl' id="disconnectInteraction">disconnect</button>
-                <button class='callControl' id="holdInteraction">hold</button>
-                <button class='callControl' id="muteInteraction">mute</button>
-                <button class='callControl' id="securePauseInteraction">securePause</button>
-            </div>
-
-            <div class="action">
-                <h4 class="actionName">Custom User Notifications</h4>
-                <input id="customNotificationMessage" value='This is a message!'>
-                <select id='notificationType'>
-                    <option value="INFO">Info</option>
-                    <option value="SUCCESS">Success</option>
-                    <option value="WARNING">Warning</option>
-                    <option value="ERROR" selected>Error</option>
-                </select>
-                <button id="sendCustomNotification" type="button">Send Data</button>
+                <p>
+                    You can raise events from the main application to automatically place a call using the embedded client.
+                    <a href="#" id="clickToDial" class="phone-link">(+34) 604-804-440</a>
+                </p>
             </div>
         </div>
-
-        <div class="events">
-            <h3>Events</h3>
-
-            <div class="event">
-                <h4 class="eventName">Screen Pop</h4>
-                <textarea id="screenPopPayload" rows="5"></textarea>
-            </div>
-
-            <div class="event">
-                <h4 class="eventName">Process Call Log</h4>
-                <textarea id="processCallLogPayLoad" rows="5"></textarea>
-            </div>
-
-            <div class="event">
-                <h4 class="eventName">Open Call Log</h4>
-                <textarea id="openCallLogPayLoad" rows="5"></textarea>
-            </div>
-        </div>
-
-        <div class="subscriptions">
-            <h3>Subscribe</h3>
-
-            <div class="subscription">
-                <h4>Interaction</h4>
-                <textarea id="interactionSubscriptionPayload" rows="5"></textarea>
-            </div>
-
-            <div class="subscription">
-                <h4>UserAction</h4>
-                <textarea id="userActionSubscriptionPayload" rows="5"></textarea>
-            </div>
-
-            <div class="subscription">
-                <h4>Notification</h4>
-                <textarea id="notificationSubscriptionPayload" rows="5"></textarea>
-            </div>
-        </div>
-
     </div>
 
     <script>
@@ -250,6 +147,9 @@
         const controlsDrawer = document.getElementById('controlsDrawer');
         const contentDrawer = document.getElementById('contentDrawer');
 
+        const softphoneFrame = document.getElementById('softphone');
+        const clickToDialLink = document.getElementById('clickToDial');
+
         controlsBtn.addEventListener('click', () => {
             controlsDrawer.classList.toggle('open');
         });
@@ -258,19 +158,22 @@
             contentDrawer.classList.toggle('open');
         });
 
-          const softphoneFrame = document.getElementById('softphone');
-    
-          document.getElementById('clickToDial').addEventListener('click', function (e) {
-            e.preventDefault();
-        
+        function sendClickToDial() {
             softphoneFrame.contentWindow.postMessage(
-              JSON.stringify({
-                type: 'clickToDial',
-                data: '+34604804440'
-              }),
-              '*'
+                JSON.stringify({
+                    type: 'clickToDial',
+                    data: '+34604804440'
+                }),
+                '*'
             );
-          });
+        }
+
+        softphoneFrame.addEventListener('load', () => {
+            clickToDialLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                sendClickToDial();
+            });
+        });
     </script>
 
 </body>
