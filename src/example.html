@@ -257,6 +257,20 @@
         contentBtn.addEventListener('click', () => {
             contentDrawer.classList.toggle('open');
         });
+
+          const softphoneFrame = document.getElementById('softphone');
+    
+          document.getElementById('clickToDial').addEventListener('click', function (e) {
+            e.preventDefault();
+        
+            softphoneFrame.contentWindow.postMessage(
+              JSON.stringify({
+                type: 'clickToDial',
+                data: '3172222222'
+              }),
+              '*'
+            );
+          });
     </script>
 
 </body>
