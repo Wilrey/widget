@@ -288,6 +288,64 @@
     </div>
 
     <script>
+/* ===============================
+   1. LOG TODOS LOS CLICKS
+================================ */
+document.addEventListener('click', function (e) {
+    console.log('[PARENT] CLICK →', e.target);
+}, true);
+
+
+/* ===============================
+   2. LOG TODOS LOS MENSAJES RECIBIDOS (desde iframe)
+================================ */
+window.addEventListener('message', function (event) {
+    console.log('------------------------------');
+    console.log('[PARENT] MESSAGE RECEIVED');
+    console.log('Origin:', event.origin);
+    console.log('Raw:', event.data);
+
+    try {
+        const parsed = JSON.parse(event.data);
+        console.log('Parsed:', parsed);
+    } catch (e) {
+        console.log('Not JSON');
+    }
+});
+
+
+/* ===============================
+   3. LOG TODOS LOS MENSAJES ENVIADOS
+   (intercepta postMessage)
+================================ */
+(function () {
+    const originalPostMessage = Window.prototype.postMessage;
+
+    Window.prototype.postMessage = function (message, targetOrigin, transfer) {
+        console.log('------------------------------');
+        console.log('[PARENT] MESSAGE SENT');
+        console.log('To:', targetOrigin);
+        console.log('Payload:', message);
+
+        try {
+            console.log('Parsed:', JSON.parse(message));
+        } catch (e) {
+            console.log('Not JSON');
+        }
+
+        return originalPostMessage.apply(this, arguments);
+    };
+})();
+
+
+/* ===============================
+   4. LOG ESTADO DEL IFRAME
+================================ */
+const softphoneFrame = document.getElementById('softphone');
+
+softphoneFrame.addEventListener('load', function () {
+    console.log('[PARENT] SOFTPHONE IFRAME LOADED');
+});
         const controlsBtn = document.getElementById('toggleControls');
         const contentBtn = document.getElementById('toggleContent');
 
