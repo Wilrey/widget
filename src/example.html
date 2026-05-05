@@ -287,96 +287,60 @@
         </div>
     </div>
 
-    <script>
-/* ===============================
-   1. LOG TODOS LOS CLICKS
-================================ */
-document.addEventListener('click', function (e) {
-    console.log('[PARENT] CLICK →', e.target);
-}, true);
+<script>
+  const controlsBtn = document.getElementById('toggleControls');
+  const contentBtn = document.getElementById('toggleContent');
+  const controlsDrawer = document.getElementById('controlsDrawer');
+  const contentDrawer = document.getElementById('contentDrawer');
+  const softphoneFrame = document.getElementById('softphone');
+  const clickToDialLink = document.getElementById('clickToDial');
 
+  console.log('[PARENT] script loaded');
 
-/* ===============================
-   2. LOG TODOS LOS MENSAJES RECIBIDOS (desde iframe)
-================================ */
-window.addEventListener('message', function (event) {
-    console.log('------------------------------');
+  document.addEventListener('click', function (e) {
+    console.log('[PARENT] CLICK ->', e.target);
+  }, true);
+
+  window.addEventListener('message', function (event) {
     console.log('[PARENT] MESSAGE RECEIVED');
-    console.log('Origin:', event.origin);
-    console.log('Raw:', event.data);
+    console.log('origin:', event.origin);
+    console.log('raw:', event.data);
 
     try {
-        const parsed = JSON.parse(event.data);
-        console.log('Parsed:', parsed);
-    } catch (e) {
-        console.log('Not JSON');
+      console.log('parsed:', JSON.parse(event.data));
+    } catch (err) {
+      console.log('not JSON');
     }
-});
+  });
 
+  controlsBtn.addEventListener('click', () => {
+    console.log('[PARENT] toggleControls clicked');
+    controlsDrawer.classList.toggle('open');
+  });
 
-/* ===============================
-   3. LOG TODOS LOS MENSAJES ENVIADOS
-   (intercepta postMessage)
-================================ */
-(function () {
-    const originalPostMessage = Window.prototype.postMessage;
+  contentBtn.addEventListener('click', () => {
+    console.log('[PARENT] toggleContent clicked');
+    contentDrawer.classList.toggle('open');
+  });
 
-    Window.prototype.postMessage = function (message, targetOrigin, transfer) {
-        console.log('------------------------------');
-        console.log('[PARENT] MESSAGE SENT');
-        console.log('To:', targetOrigin);
-        console.log('Payload:', message);
+  softphoneFrame.addEventListener('load', function () {
+    console.log('[PARENT] softphone iframe loaded');
+  });
 
-        try {
-            console.log('Parsed:', JSON.parse(message));
-        } catch (e) {
-            console.log('Not JSON');
-        }
+  clickToDialLink.addEventListener('click', function (e) {
+    e.preventDefault();
 
-        return originalPostMessage.apply(this, arguments);
+    const payload = {
+      type: 'clickToDial',
+      data: {
+        number: '+34604804440'
+      }
     };
-})();
 
+    console.log('[PARENT] clickToDial clicked -> sending:', payload);
 
-/* ===============================
-   4. LOG ESTADO DEL IFRAME
-================================ */
-const softphoneFrame = document.getElementById('softphone');
-
-softphoneFrame.addEventListener('load', function () {
-    console.log('[PARENT] SOFTPHONE IFRAME LOADED');
-});
-        const controlsBtn = document.getElementById('toggleControls');
-        const contentBtn = document.getElementById('toggleContent');
-
-        const controlsDrawer = document.getElementById('controlsDrawer');
-        const contentDrawer = document.getElementById('contentDrawer');
-
-        const softphoneFrame = document.getElementById('softphone');
-        const clickToDialLink = document.getElementById('clickToDial');
-
-        controlsBtn.addEventListener('click', () => {
-            controlsDrawer.classList.toggle('open');
-        });
-
-        contentBtn.addEventListener('click', () => {
-            contentDrawer.classList.toggle('open');
-        });
-
-        clickToDialLink.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            softphoneFrame.contentWindow.postMessage(
-                JSON.stringify({
-                    type: 'clickToDial',
-                    data: {
-                        number: '+34604804440'
-                    }
-                }),
-                '*'
-            );
-        });
-    </script>
-
+    softphoneFrame.contentWindow.postMessage(JSON.stringify(payload), '*');
+  });
+</script>
 </body>
 </html>
