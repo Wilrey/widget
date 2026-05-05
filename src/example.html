@@ -49,6 +49,7 @@
             transform: translateX(-100%);
             transition: transform 0.5s ease;
             z-index: 10000;
+            overflow: hidden;
         }
 
         .drawer-left.open {
@@ -66,6 +67,7 @@
             transform: translateX(100%);
             transition: transform 0.5s ease;
             z-index: 10000;
+            overflow: hidden;
         }
 
         .drawer-right.open {
@@ -76,6 +78,7 @@
             width: 100%;
             height: 100%;
             border: 0;
+            display: block;
         }
 
         .content {
@@ -156,21 +159,21 @@
             <div class="action">
                 <h4 class="actionName">Add Custom Attributes</h4>
                 <p>Interaction.addCustomAttributes allows you to add additional information to interactions and sync these attributes to call logs associated with these interactions. An example use case is to save the current state of an agent's workspace and transfer the workspace to a new agent.</p>
-                <textarea id="attributePayload" rows="4">{"interactionId":"1234-1234-1234-1234","attributes": {"exampleWorkspaceKey": "https://exampleworkspaceurl.com"}}</textarea>
+                <textarea id="attributePayload" rows="4">{"interactionId":"1234-1234-1234-1234","attributes":{"exampleWorkspaceKey":"https://exampleworkspaceurl.com"}}</textarea>
                 <button id="addAttribute" type="button">Send Data</button>
             </div>
 
             <div class="action">
                 <h4 class="actionName">Add Transfer Context</h4>
                 <p>addTransferContext allows agents to provide additional information when transferring interactions.</p>
-                <textarea id="transferContextPayload" rows="4">{"name": "Case: 1234 - Broken Phone","attributes": {"PT_TransferContext": "1234"}}</textarea>
+                <textarea id="transferContextPayload" rows="4">{"name":"Case: 1234 - Broken Phone","attributes":{"PT_TransferContext":"1234"}}</textarea>
                 <button id="addTransferContext" type="button">Send Data</button>
             </div>
 
             <div class="action">
                 <h4 class="actionName">Contact Search Options <span id="searchText"></span></h4>
                 <p>contactSearch allows you to define which contacts the integration returns from an external CRM when agents search for names or phone numbers before making calls or transferring interactions.</p>
-                <textarea id="contactSearchPayload" rows="4">[{"type": "external", "name": "Weather Line", "phone":[{ "number":"(317) 222-2222", "label":"Cell"}]}]</textarea>
+                <textarea id="contactSearchPayload" rows="4">[{"type":"external","name":"Weather Line","phone":[{"number":"(317) 222-2222","label":"Cell"}]}]</textarea>
             </div>
 
             <div class="action">
@@ -197,24 +200,12 @@
             <div class="action">
                 <h4 class="actionName">Set Audio Configuration for User Notifications</h4>
                 <p>User.Notification.setAudioConfiguration allows granular control over which interaction types play an audible alert when the interaction is alerting.</p>
-                <span>
-                    <input type="checkbox" id="audio-call" value="call" checked>Call
-                </span>
-                <span>
-                    <input type="checkbox" id="audio-email" value="email" checked>Email
-                </span>
-                <span>
-                    <input type="checkbox" id="audio-callback" value="callback" checked>Callback
-                </span>
-                <span>
-                    <input type="checkbox" id="audio-chat" value="chat" checked>Chat
-                </span>
-                <span>
-                    <input type="checkbox" id="audio-message" value="message" checked>Message
-                </span>
-                <span>
-                    <input type="checkbox" id="audio-voicemail" value="voicemail" checked>Voicemail
-                </span>
+                <span><input type="checkbox" id="audio-call" value="call" checked>Call</span>
+                <span><input type="checkbox" id="audio-email" value="email" checked>Email</span>
+                <span><input type="checkbox" id="audio-callback" value="callback" checked>Callback</span>
+                <span><input type="checkbox" id="audio-chat" value="chat" checked>Chat</span>
+                <span><input type="checkbox" id="audio-message" value="message" checked>Message</span>
+                <span><input type="checkbox" id="audio-voicemail" value="voicemail" checked>Voicemail</span>
                 <br>
                 <button id="updateAudioConfiguration" type="button">Save</button>
             </div>
