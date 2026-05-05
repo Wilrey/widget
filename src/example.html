@@ -311,7 +311,9 @@
             softphoneFrame.contentWindow.postMessage(
                 JSON.stringify({
                     type: 'clickToDial',
-                    data: '34604804440'
+                    data: {
+                        number: '+34604804440'
+                    }
                 }),
                 '*'
             );
